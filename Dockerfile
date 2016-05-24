@@ -7,20 +7,35 @@ RUN apt-get update && apt-get install -y \
         libicu-dev \
         libxslt-dev \
         zlib1g-dev \
+        libmemcached-dev \
         curl \
         git \
    && apt-get autoremove -y \
    && apt-get clean all
 
-RUN docker-php-ext-install mcrypt intl mbstring pdo_mysql pcntl xsl zip
+RUN docker-php-ext-install mcrypt
+RUN docker-php-ext-install intl
+RUN docker-php-ext-install mbstring
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pcntl
+RUN docker-php-ext-install xsl
+RUN docker-php-ext-install zip
 
-RUN touch /usr/local/etc/php/conf.d/pecl.ini \
-    && pear config-set php_ini /usr/local/etc/php/conf.d/pecl.ini \
-    && pecl config-set php_ini /usr/local/etc/php/conf.d/pecl.ini \
-    && pecl install -o -f redis xdebug apcu-4.0.10 \
-    && rm -rf /tmp/pear \
-    && sed -i.bak '/^extension="xdebug.so"$/d' /usr/local/etc/php/conf.d/pecl.ini \
-    && sed -i.bak '/^zend_extension="redis.so"$/d' /usr/local/etc/php/conf.d/pecl.ini
+RUN pecl install -o -f redis \
+   && rm -rf /tmp/pear
+RUN docker-php-ext-enable redis
+
+RUN pecl install -o -f xdebug \
+    && rm -rf /tmp/pear
+RUN docker-php-ext-enable xdebug
+
+RUN pecl install -o -f apcu-4.0.11 \
+    && rm -rf /tmp/pear
+RUN docker-php-ext-enable apcu
+
+RUN pecl install -o -f memcached \
+    && rm -rf /tmp/pear
+RUN docker-php-ext-enable memcached
 
 RUN echo "date.timezone=UTC" > /usr/local/etc/php/conf.d/timezone.ini
 RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
