@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
         libmemcached-dev \
         curl \
         git \
-   && apt-get autoremove -y \
-   && apt-get clean all
+    && apt-get autoremove -y \
+    && apt-get clean all
 
 RUN docker-php-ext-install mcrypt
 RUN docker-php-ext-install intl
@@ -21,8 +21,8 @@ RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
 
-RUN pecl install -o -f redis \
-   && rm -rf /tmp/pear
+RUN pecl install -o -f redis-2.2.8 \
+    && rm -rf /tmp/pear
 RUN docker-php-ext-enable redis
 
 RUN pecl install -o -f xdebug \
