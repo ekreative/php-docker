@@ -27,7 +27,7 @@ RUN docker-php-ext-enable redis
 
 RUN pecl install -o -f xdebug \
     && rm -rf /tmp/pear
-RUN docker-php-ext-enable xdebug
+# RUN docker-php-ext-enable xdebug
 
 RUN pecl install -o -f apcu-4.0.11 \
     && rm -rf /tmp/pear
