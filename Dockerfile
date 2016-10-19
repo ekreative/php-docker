@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
         libxslt-dev \
         zlib1g-dev \
         libmemcached-dev \
+				libssl-dev \
         curl \
         git \
    && apt-get autoremove -y \
@@ -40,9 +41,10 @@ RUN curl -L -o /tmp/memcached.tar.gz https://github.com/php-memcached-dev/php-me
     && rm -r memcached \
     && docker-php-ext-enable memcached
 
-RUN pecl install -o -f xdebug \
+RUN pecl install -o -f xdebug mongodb \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable xdebug
+RUN docker-php-ext-enable mongodb
 
 RUN pecl config-set preferred_state beta \
     && pecl install -o -f apcu_bc \
