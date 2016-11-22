@@ -16,4 +16,4 @@ ENV PATH /root/.composer/vendor/bin:$PATH
 ADD composer.json /root/.composer/composer.json
 RUN composer global require sensiolabs-de/deprecation-detector
 
-CMD ["deprecation-detector", "check", "src/", "vendor/"]
+CMD ["deprecation-detector", "check", "--fail", "src/", "vendor/"]
