@@ -1,4 +1,4 @@
-FROM php:5-cli
+FROM php:5.5-cli
 
 MAINTAINER Fred Cox "mcfedr@gmail.com"
 
