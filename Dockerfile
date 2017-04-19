@@ -33,7 +33,7 @@ RUN pecl install -o -f apcu-4.0.11 \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable apcu
 
-RUN pecl install -o -f memcached \
+RUN pecl install -o -f memcached-2.2.0 \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable memcached
 
