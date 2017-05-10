@@ -51,8 +51,8 @@ RUN pecl config-set preferred_state beta \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable --ini-name 0-apc.ini apcu apc
 
-ENV PHP_TIMECOP_VERSION fix_create_from_format
-RUN curl -L -o /tmp/timecop.tar.gz https://github.com/mcfedr/php-timecop/archive/${PHP_TIMECOP_VERSION}.tar.gz \
+ENV PHP_TIMECOP_VERSION master
+RUN curl -L -o /tmp/timecop.tar.gz https://github.com/hnw/php-timecop/archive/${PHP_TIMECOP_VERSION}.tar.gz \
     && mkdir -p timecop \
     && tar xfz /tmp/timecop.tar.gz -C timecop --strip-components=1 \
     && rm -r /tmp/timecop.tar.gz \
