@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
         libxslt-dev \
         zlib1g-dev \
         libmemcached-dev \
+        libmagickwand-dev \
         curl \
         git \
     && apt-get autoremove -y \
@@ -36,6 +37,10 @@ RUN docker-php-ext-enable apcu
 RUN pecl install -o -f memcached-2.2.0 \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable memcached
+
+RUN pecl install -o -f imagick \
+    && rm -rf /tmp/pear
+RUN docker-php-ext-enable imagick
 
 # ENV PHP_TIMECOP_VERSION master
 # RUN curl -L -o /tmp/timecop.tar.gz https://github.com/hnw/php-timecop/archive/${PHP_TIMECOP_VERSION}.tar.gz \
