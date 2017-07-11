@@ -42,21 +42,6 @@ RUN pecl install -o -f imagick \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable imagick
 
-# ENV PHP_TIMECOP_VERSION master
-# RUN curl -L -o /tmp/timecop.tar.gz https://github.com/hnw/php-timecop/archive/${PHP_TIMECOP_VERSION}.tar.gz \
-#     && mkdir -p timecop \
-#     && tar xfz /tmp/timecop.tar.gz -C timecop --strip-components=1 \
-#     && rm -r /tmp/timecop.tar.gz \
-#     && ( \
-#       cd timecop \
-#       && phpize \
-#       && ./configure \
-#       && make -j$(nproc) \
-#       && make install \
-#     ) \
-#     && rm -r timecop \
-#     && docker-php-ext-enable timecop
-
 RUN echo "date.timezone=UTC" > /usr/local/etc/php/conf.d/timezone.ini
 RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 
