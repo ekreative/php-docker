@@ -22,6 +22,7 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install pcntl
 RUN docker-php-ext-install xsl
 RUN docker-php-ext-install zip
+RUN docker-php-ext-install soap
 
 RUN pecl install -o -f redis \
     && rm -rf /tmp/pear
