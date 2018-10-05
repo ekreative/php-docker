@@ -27,10 +27,6 @@ RUN pecl install -o -f redis-2.2.8 \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable redis
 
-RUN pecl install -o -f xdebug-2.5.5 \
-    && rm -rf /tmp/pear
-# RUN docker-php-ext-enable xdebug
-
 RUN pecl install -o -f apcu-4.0.11 \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable apcu
@@ -48,6 +44,9 @@ RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
+
+RUN pecl install -o -f xdebug-2.5.5 \
+    && rm -rf /tmp/pear
 
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
