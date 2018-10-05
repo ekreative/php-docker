@@ -27,7 +27,7 @@ RUN pecl install -o -f redis-2.2.8 \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable redis
 
-RUN pecl install -o -f xdebug \
+RUN pecl install -o -f xdebug-2.5.5 \
     && rm -rf /tmp/pear
 # RUN docker-php-ext-enable xdebug
 
