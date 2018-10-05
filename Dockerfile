@@ -31,10 +31,6 @@ RUN pecl install -o -f memcached \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable memcached
 
-RUN pecl install -o -f xdebug \
-    && rm -rf /tmp/pear
-RUN docker-php-ext-enable xdebug
-
 RUN pecl install -o -f mongodb \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable mongodb
@@ -53,6 +49,10 @@ RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
+
+RUN pecl install -o -f xdebug \
+    && rm -rf /tmp/pear
+RUN docker-php-ext-enable xdebug
 
 RUN mkdir -p /opt/workspace
 WORKDIR /opt/workspace
