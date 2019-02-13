@@ -3,15 +3,22 @@ FROM php:7-cli
 MAINTAINER Fred Cox "mcfedr@gmail.com"
 
 RUN apt-get update && apt-get install -y \
-        libmcrypt-dev \
-        libicu-dev \
-        libxslt-dev \
-        zlib1g-dev \
-        libmemcached-dev \
-        libssl-dev \
-        libmagickwand-dev \
         curl \
         git \
+# For composer mostly
+        unzip \
+# for intl
+        libicu-dev \
+# for xsl
+        libxslt-dev \
+# for zip
+        zlib1g-dev \
+        libzip-dev \
+# for memcached
+        libmemcached-dev \
+        libssl-dev \
+# for imagic
+        libmagickwand-dev \
     && apt-get autoremove -y \
     && apt-get clean all
 
@@ -51,7 +58,7 @@ RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
-RUN pecl install -o -f xdebug \
+RUN pecl install -o -f xdebug-beta \
     && rm -rf /tmp/pear
 RUN docker-php-ext-enable xdebug
 
