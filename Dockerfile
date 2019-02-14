@@ -1,4 +1,4 @@
-FROM php:7-cli
+FROM php:7.2-cli
 
 MAINTAINER Fred Cox "mcfedr@gmail.com"
 
@@ -58,7 +58,7 @@ RUN echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 
-RUN pecl install -o -f xdebug-beta \
+RUN pecl install -o -f xdebug \
     && rm -rf /tmp/pear
 
 RUN mkdir -p /opt/workspace
