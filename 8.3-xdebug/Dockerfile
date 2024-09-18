@@ -39,6 +39,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions \
 RUN echo "date.timezone=UTC" > /usr/local/etc/php/conf.d/timezone.ini \
     && echo "memory_limit=512M" > /usr/local/etc/php/conf.d/memory.ini
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
 ADD https://getcomposer.org/composer-stable.phar /usr/local/bin/composer
 RUN chmod +rx /usr/local/bin/composer \
     && composer global config --no-plugins allow-plugins.symfony/flex true \
